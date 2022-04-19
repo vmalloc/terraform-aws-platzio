@@ -37,10 +37,16 @@ data "aws_iam_policy_document" "role_queue_permissions" {
       "sqs:DeleteMessage",
       "sqs:GetQueueUrl",
       "sqs:GetQueueAttributes",
-      "sqs:ListQueues",
       "sqs:ReceiveMessage",
     ]
     resources = [aws_sqs_queue.this.arn]
+  }
+
+  statement {
+    actions = [
+      "sqs:ListQueues",
+    ]
+    resources = ["*"]
   }
 }
 
