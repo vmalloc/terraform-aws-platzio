@@ -1,0 +1,37 @@
+ingress:
+  enabled: true
+  hosts:
+    - host: ${domain}
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - hosts:
+        - ${domain}
+      secretName: ${tls_secret_name}
+
+api:
+  enabledVersions:
+%{ if api_enable_v1 }
+    - v1
+%{ endif }
+    - v2
+
+%{ if chart_discovery != null }
+chartDiscovery:
+  ecr:
+    queueName: ${chart_discovery.queue_name}
+    regionName: ${chart_discovery.queue_region}
+  serviceAccount:
+    annotations:
+      eks.amazonaws.com/role-arn: ${chart_discovery.iam_role_arn}
+%{ endif }
+
+taskRunner:
+  serviceAccount:
+    annotations:
+      eks.amazonaws.com/role-arn: ${task_runner_role_arn}
+
+postgresql:
+  enabled: ${use_chart_db}
+  databaseUrlOverride: ${db_url_override}
