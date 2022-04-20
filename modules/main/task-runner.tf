@@ -41,3 +41,8 @@ resource "aws_iam_role_policy_attachment" "task_runner" {
   role       = aws_iam_role.task_runner.name
   policy_arn = aws_iam_policy.task_runner.arn
 }
+
+resource "aws_iam_role_policy_attachment" "ecr_readonly" {
+  role       = aws_iam_role.task_runner.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+}
