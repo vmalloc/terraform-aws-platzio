@@ -10,13 +10,13 @@ data "aws_iam_policy_document" "assume_role" {
 
     condition {
       test     = "StringEquals"
-      variable = "${local.irsa_oidc_provider}:sub"
+      variable = "${var.irsa_oidc_provider}:sub"
       values   = ["system:serviceaccount:${var.k8s_namespace}:${var.helm_release_name}-chart-discovery"]
     }
 
     principals {
       type        = "Federated"
-      identifiers = [local.irsa_oidc_arn]
+      identifiers = [var.irsa_oidc_arn]
     }
   }
 }

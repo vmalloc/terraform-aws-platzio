@@ -12,12 +12,12 @@ ingress:
 
 api:
   enabledVersions:
-%{ if api_enable_v1 }
+%{ if api_enable_v1 ~}
     - v1
-%{ endif }
+%{ endif ~}
     - v2
 
-%{ if chart_discovery != null }
+%{ if chart_discovery != null ~}
 chartDiscovery:
   ecr:
     queueName: ${chart_discovery.queue_name}
@@ -25,12 +25,17 @@ chartDiscovery:
   serviceAccount:
     annotations:
       eks.amazonaws.com/role-arn: ${chart_discovery.iam_role_arn}
-%{ endif }
+%{ endif ~}
 
-taskRunner:
-  serviceAccount:
-    annotations:
-      eks.amazonaws.com/role-arn: ${task_runner_role_arn}
+%{ if k8s_agents != [] ~}
+k8sAgents:
+%{ for k8s_agent in k8s_agents ~}
+  - name: ${k8s_agent.name}
+    serviceAccount:
+      annotations:
+        eks.amazonaws.com/role-arn: ${k8s_agent.iam_role_arn}
+%{ endfor ~}
+%{ endif ~}
 
 postgresql:
   enabled: ${use_chart_db}

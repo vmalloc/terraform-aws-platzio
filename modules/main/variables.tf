@@ -9,16 +9,6 @@ variable "k8s_namespace" {
   default     = "platz"
 }
 
-variable "irsa_oidc_provider" {
-  description = "IRSA OIDC provider address, to be used in assume role documents"
-  type        = string
-}
-
-variable "irsa_oidc_arn" {
-  description = "IRSA OIDC provider ARN"
-  type        = string
-}
-
 variable "helm_release_name" {
   description = "The name of the Helm release"
   default     = "platz"
@@ -27,7 +17,7 @@ variable "helm_release_name" {
 variable "chart_version" {
   description = "Helm chart version to deploy"
   type        = string
-  default     = "0.3.0-beta.4"
+  default     = "0.3.0-beta.5"
 }
 
 variable "domain" {
@@ -75,4 +65,12 @@ variable "chart_discovery" {
     queue_name   = string
     queue_region = string
   })
+}
+
+variable "k8s_agents" {
+  description = "A list of IAM roles, once for each k8s-agent to run. Each list item of this variable should use the outputs of the k8s-agent-role terraform module"
+  type = list(object({
+    name         = string
+    iam_role_arn = string
+  }))
 }

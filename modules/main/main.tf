@@ -17,12 +17,12 @@ resource "helm_release" "this" {
   version    = var.chart_version
 
   values = [templatefile("${path.module}/values.yaml", {
-    domain               = var.domain
-    tls_secret_name      = var.tls_secret_name
-    api_enable_v1        = var.api_enable_v1
-    chart_discovery      = var.chart_discovery
-    task_runner_role_arn = aws_iam_role.task_runner.arn
-    use_chart_db         = var.use_chart_db
-    db_url_override      = var.db_url_override
+    domain          = var.domain
+    tls_secret_name = var.tls_secret_name
+    api_enable_v1   = var.api_enable_v1
+    chart_discovery = var.chart_discovery
+    k8s_agents      = var.k8s_agents
+    use_chart_db    = var.use_chart_db
+    db_url_override = var.db_url_override
   })]
 }
