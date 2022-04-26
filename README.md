@@ -34,22 +34,22 @@ module "platz" {
 }
 ```
 
-This would deploy Platz in the EKS cluster named in `k8s_cluster_name`.
+This module can get the following variables:
 
-The `domain` and `tls_secret_name` create an Ingress for Platz.
-
-`oidc_ssm_params` expects to find the SSM parameters in the same region where
-`aws` provider runs. These parameters are for a Google OAuth client credentials
-defined for the same domain above. See below for more.
-
-`chart_discovery` contains the IAM role for discovering charts in ECR repos,
-as created by the chart discovery module described below. The outputs of the
-chart discovery module match the inputs required by this module, so you can
-pass the module object directly into this module.
-
-`k8s_agents` is an array of outputs from the K8s agent role modules described
-below. It works similarly to `chart_discovery`, just pass the module outputs
-as array elements into this module.
+| Variable            | Required | Default         | Description                                                                                                                                                                                                                                                           |
+| ------------------- | -------- | --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `k8s_cluster_name`  | Yes      |                 | Name of EKS cluster, used for getting credentials                                                                                                                                                                                                                     |
+| `k8s_namespace`     |          | `"platz"`       | Kubernetes namespace name, also used as prefix for AWS resources                                                                                                                                                                                                      |
+| `helm_release_name` |          | `"platz"`       | The name of the Helm release                                                                                                                                                                                                                                          |
+| `chart_version`     |          | Current version | Helm chart version to install/upgrade                                                                                                                                                                                                                                 |
+| `domain`            | Yes      |                 | Domain to use for ingress, has to match the OIDC domain (see below)                                                                                                                                                                                                   |
+| `tls_secret_name`   | Yes      |                 | Secret name to use for ingress TLS                                                                                                                                                                                                                                    |
+| `oidc_ssm_params`   | Yes      |                 | Mapping containing SSM parameter names for configuring OIDC authentication: `server_url`, `client_id` and `client_secret`                                                                                                                                             |
+| `api_enable_v1`     |          | `false`         | Whether to enable the obsolete `/api/v1` backend paths                                                                                                                                                                                                                |
+| `use_chart_db`      |          | `true`          | Install the `postgresql` sub-chart (if `false`, you must pass `db_url_override`)                                                                                                                                                                                      |
+| `db_url_override`   |          |                 | Provide an override URL for the database (ignored unless `use_chart_db` is `false`)                                                                                                                                                                                   |
+| `chart_discovery`   |          |                 | Contains the IAM role for discovering charts in ECR repos, as created by the chart discovery module described below. The outputs of the chart discovery module match the inputs required by this module, so you can pass the module object directly into this module. |
+| `k8s_agents`        |          |                 | An array of outputs from the K8s agent role modules described below. It works similarly to `chart_discovery`, just pass the module outputs as array elements into this module.                                                                                        |
 
 ## Chart Discovery Module
 
