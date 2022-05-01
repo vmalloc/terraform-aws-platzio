@@ -17,7 +17,7 @@ variable "helm_release_name" {
 variable "chart_version" {
   description = "Helm chart version to install/upgrade"
   type        = string
-  default     = "0.3.3"
+  default     = "0.3.4"
 }
 
 variable "domain" {
