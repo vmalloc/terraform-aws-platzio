@@ -9,6 +9,11 @@ variable "k8s_namespace" {
   default     = "platz"
 }
 
+variable "depends_on_value" {
+  description = "Arbitrary value to pass down to the module to force its dependency on other resources for proper destruction order"
+  type        = string
+}
+
 variable "helm_release_name" {
   description = "The name of the Helm release"
   default     = "platz"
