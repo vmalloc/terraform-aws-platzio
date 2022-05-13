@@ -51,6 +51,6 @@ data "aws_iam_policy_document" "role_queue_permissions" {
 }
 
 resource "aws_iam_role_policy_attachment" "sqs" {
-  role       = "${var.k8s_namespace}-chart-discovery"
+  role       = aws_iam_role.this.name
   policy_arn = aws_iam_policy.sqs.arn
 }
