@@ -1,14 +1,24 @@
+%{ if ingress != null ~}
 ingress:
   enabled: true
+  className: ${ingress.class_name}
   hosts:
-    - host: ${domain}
+    - host: ${ingress.host}
       paths:
         - path: /
           pathType: Prefix
   tls:
     - hosts:
-        - ${domain}
-      secretName: ${tls_secret_name}
+        - ${ingress.host}
+      secretName: ${ingress.tls.secret_name}
+
+certManager:
+  certificate:
+    create: ${ingress.tls.create_certificate}
+  issuer:
+    create: ${ingress.tls.create_issuer}
+    email: ${ingress.tls.issuer_email}
+%{ endif ~}
 
 api:
   enabledVersions:

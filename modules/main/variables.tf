@@ -20,14 +20,19 @@ variable "chart_version" {
   default     = "0.3.4"
 }
 
-variable "domain" {
-  description = "Domain to use for ingress"
-  type        = string
-}
-
-variable "tls_secret_name" {
-  description = "Secret name to use for ingress TLS"
-  type        = string
+variable "ingress" {
+  description = "Chart ingress settings, if missing an ingress won't be created"
+  type = object({
+    host       = string
+    class_name = string
+    tls = object({
+      secret_name        = string
+      create_certificate = bool
+      create_issuer      = bool
+      issuer_email       = string
+    })
+  })
+  default = null
 }
 
 variable "oidc_ssm_params" {
