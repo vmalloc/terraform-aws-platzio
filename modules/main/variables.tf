@@ -12,6 +12,7 @@ variable "k8s_namespace" {
 variable "depends_on_value" {
   description = "Arbitrary value to pass down to the module to force its dependency on other resources for proper destruction order"
   type        = string
+  default     = ""
 }
 
 variable "helm_release_name" {
