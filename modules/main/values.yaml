@@ -20,7 +20,7 @@ certManager:
     email: ${ingress.tls.issuer_email}
 %{ endif ~}
 
-%{ if admin_emails ~}
+%{ if length(admin_emails) > 0 ~}
 auth:
   adminEmails:
 %{ for admin_email in admin_emails ~}
