@@ -19,6 +19,7 @@ resource "helm_release" "this" {
   values = [templatefile("${path.module}/values.yaml", {
     ingress         = var.ingress
     api_enable_v1   = var.api_enable_v1
+    admin_emails    = var.admin_emails
     chart_discovery = var.chart_discovery
     k8s_agents      = var.k8s_agents
     use_chart_db    = var.use_chart_db

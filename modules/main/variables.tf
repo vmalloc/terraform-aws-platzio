@@ -23,7 +23,7 @@ variable "helm_release_name" {
 variable "chart_version" {
   description = "Helm chart version to install/upgrade"
   type        = string
-  default     = "0.4.0"
+  default     = "0.4.1"
 }
 
 variable "ingress" {
@@ -54,6 +54,12 @@ variable "api_enable_v1" {
   description = "Enable /api/v1 backend paths"
   type        = bool
   default     = false
+}
+
+variable "admin_emails" {
+  description = "Email addresses to add as admins instead of regular users. This option is useful for allowing the first admins to log into Platz on a fresh deployment. Note that admins are added only after successful validation against the OIDC server, and if a user doesn't exist with that email. This means that if an admin is later changed to a regular user role, they will never become an admin again unless their user is deleted from the database, or removed from this option."
+  type        = list(string)
+  default     = []
 }
 
 variable "use_chart_db" {
