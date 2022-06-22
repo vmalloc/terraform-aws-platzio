@@ -9,6 +9,12 @@ variable "k8s_namespace" {
   default     = "platz"
 }
 
+variable "create_namespace" {
+  description = "Whether to create the namespace passed in the k8s_namespace variable"
+  type        = bool
+  default     = true
+}
+
 variable "depends_on_value" {
   description = "Arbitrary value to pass down to the module to force its dependency on other resources for proper destruction order"
   type        = string
