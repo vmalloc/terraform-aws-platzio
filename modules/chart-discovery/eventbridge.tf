@@ -1,5 +1,5 @@
 resource "aws_cloudwatch_event_rule" "this" {
-  name     = "${var.k8s_namespace}-chart-discovery"
+  name     = "${var.name_prefix}-chart-discovery"
   role_arn = aws_iam_role.eventbridge.arn
 
   event_pattern = <<EOF
@@ -29,7 +29,7 @@ resource "aws_cloudwatch_event_target" "this" {
 }
 
 resource "aws_iam_role" "eventbridge" {
-  name               = "${var.k8s_namespace}-chart-discovery-eventbridge"
+  name               = "${var.name_prefix}-chart-discovery-eventbridge"
   assume_role_policy = data.aws_iam_policy_document.eventbridge_assume_role.json
 }
 

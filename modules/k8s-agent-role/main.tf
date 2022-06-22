@@ -1,5 +1,5 @@
 resource "aws_iam_role" "this" {
-  name               = "${var.k8s_namespace}-k8s-agent-${var.k8s_agent_name}"
+  name               = "${var.name_prefix}-k8s-agent-${var.k8s_agent_name}"
   assume_role_policy = data.aws_iam_policy_document.this_assume_role.json
 }
 
@@ -22,7 +22,7 @@ data "aws_iam_policy_document" "this_assume_role" {
 }
 
 resource "aws_iam_policy" "this" {
-  name   = "${var.k8s_namespace}-k8s-agent"
+  name   = "${var.name_prefix}-k8s-agent"
   policy = data.aws_iam_policy_document.this.json
 }
 

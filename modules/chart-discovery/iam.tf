@@ -1,5 +1,5 @@
 resource "aws_iam_role" "this" {
-  name               = "${var.k8s_namespace}-chart-discovery"
+  name               = "${var.name_prefix}-chart-discovery"
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
 
@@ -27,7 +27,7 @@ resource "aws_iam_role_policy_attachment" "ecr_readonly" {
 }
 
 resource "aws_iam_policy" "sqs" {
-  name   = "${var.k8s_namespace}-chart-discovery-queue"
+  name   = "${var.name_prefix}-chart-discovery-queue"
   policy = data.aws_iam_policy_document.role_queue_permissions.json
 }
 

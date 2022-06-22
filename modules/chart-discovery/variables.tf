@@ -1,3 +1,9 @@
+variable "name_prefix" {
+  description = "Prefix to use for global resource names such as IAM roles"
+  type        = string
+  default     = "platz"
+}
+
 variable "k8s_namespace" {
   description = "Kubernetes namespace name where Platz is installed, possibly in another account. The namespace has to match the one used when installing Platz so that the chart-discovery worker can perform AssumeRoleWithWebIdentity to the role created in this module."
   type        = string
