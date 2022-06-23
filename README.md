@@ -14,7 +14,7 @@ For example (see more below on `chart_discovery` and `k8s_agents`):
 
 ```
 module "platz" {
-  source = "github.com/platzio/terraform-aws-platzio?ref=v0.4.1/modules/main"
+  source = "github.com/platzio/terraform-aws-platzio?ref=v0.4.2/modules/main"
 
   k8s_cluster_name = "EKS CLUSTER NAME"
   domain           = "platz.${aws_route53_zone.ZONE.name}"
@@ -63,7 +63,7 @@ For example:
 
 ```
 module "platz_chart_discovery" {
-  source = "github.com/platzio/terraform-aws-platzio?ref=v0.4.1/modules/chart-discovery"
+  source = "github.com/platzio/terraform-aws-platzio?ref=v0.4.2/modules/chart-discovery"
 
   irsa_oidc_provider = (OIDC Provider)
   irsa_oidc_arn      = (OIDC ARN)
@@ -84,7 +84,7 @@ Example:
 
 ```
 module "platz_k8s_agent_role" {
-  source = "github.com/platzio/terraform-aws-platzio?ref=v0.4.1/modules/k8s-agent-role"
+  source = "github.com/platzio/terraform-aws-platzio?ref=v0.4.2/modules/k8s-agent-role"
 
   k8s_agent_name     = "default"
   irsa_oidc_provider = (OIDC Provider)
@@ -118,7 +118,7 @@ resource "aws_iam_openid_connect_provider" "platz_cluster" {
 }
 
 module "platz_k8s_agent_role" {
-  source = "github.com/platzio/terraform-aws-platzio?ref=v0.4.1/modules/k8s-agent-role"
+  source = "github.com/platzio/terraform-aws-platzio?ref=v0.4.2/modules/k8s-agent-role"
 
   k8s_agent_name     = "prod"
   irsa_oidc_provider = replace(aws_iam_openid_connect_provider.platz_cluster.url, "https://", "")
