@@ -1,5 +1,5 @@
 resource "aws_sqs_queue" "this" {
-  name                      = "${var.k8s_namespace}-chart-discovery"
+  name                      = "${var.name_prefix}-chart-discovery"
   message_retention_seconds = 1209600
   receive_wait_time_seconds = 20
 }
