@@ -2,7 +2,7 @@
 ingress:
   enabled: true
   className: ${ingress.class_name}
-  hosts:
+  rules:
     - host: ${ingress.host}
       paths:
         - path: /
