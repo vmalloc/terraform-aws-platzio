@@ -97,3 +97,15 @@ variable "k8s_agents" {
     iam_role_arn = string
   }))
 }
+
+variable "repository" {
+  description = "Helm chart url to install"
+  type        = string
+  default     = "https://platzio.github.io/helm-charts"
+}
+
+variable "chart" {
+  description = "Helm chart name"
+  type        = string
+  default     = "platzio"
+}

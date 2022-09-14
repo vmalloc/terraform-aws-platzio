@@ -14,8 +14,8 @@ resource "helm_release" "this" {
 
   name       = var.helm_release_name
   namespace  = var.k8s_namespace
-  repository = "https://platzio.github.io/helm-charts"
-  chart      = "platzio"
+  repository = var.repository
+  chart      = var.chart
   version    = var.chart_version
 
   values = [templatefile("${path.module}/values.yaml", {
