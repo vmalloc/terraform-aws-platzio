@@ -16,7 +16,7 @@ resource "helm_release" "this" {
   namespace  = var.k8s_namespace
   repository = var.repository
   chart      = var.chart
-  version    = "latest"
+  version    = var.chart_version
 
   values = [templatefile("${path.module}/values.yaml", {
     ingress         = var.ingress
