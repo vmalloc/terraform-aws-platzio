@@ -26,11 +26,12 @@ variable "helm_release_name" {
   default     = "platz"
 }
 
+/*
 variable "chart_version" {
   description = "Helm chart version to install/upgrade"
   type        = string
   default     = "0.4.6"
-}
+}*/
 
 variable "ingress" {
   description = "Chart ingress settings, if missing an ingress won't be created"
